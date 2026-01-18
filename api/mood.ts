@@ -31,3 +31,12 @@ export async function deleteMoodById(id: number): Promise<void> {
     throw error;
   }
 }
+
+export async function getAllMoods(): Promise<Mood[]> {
+  const { data, error } = await supabase
+    .from("moods")
+    .select("*")
+    .order("created_at", { ascending: false });
+  if (error) throw error;
+  return data ?? [];
+}
