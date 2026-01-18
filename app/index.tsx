@@ -1,19 +1,19 @@
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import React, { useState } from 'react'
-import { supabase } from "@/supabase";
+import { insertMood } from "@/api/mood";
 
 
 const App = () => {
     const [mood, setMood] = useState("");
 
     async function saveMood() {
-        const { error } = await supabase.from("moods").insert([{ text: mood }]);
-        if (error) {
-          alert("Error saving mood");
-          console.log(error.message);
-        } else {
+        try {
+          await insertMood(mood);
           alert("Mood saved!");
           setMood("");
+        } catch (err) {
+          alert("Error saving Mood");
+          console.error(err);
         }
     }
   return (
