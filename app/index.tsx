@@ -1,36 +1,57 @@
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
-import React, { useState } from 'react'
-import { insertMood } from "@/api/mood";
+import React, { useEffect, useState } from "react";
+import { getLastMood, insertMood } from "@/api/mood";
+import { Mood } from "@/types/supabase";
 
 
 const App = () => {
-    const [mood, setMood] = useState("");
+  const [mood, setMood] = useState("");
+  const [latestMood, setLatestMood] = useState<Mood | null>(null);
 
-    async function saveMood() {
-        try {
-          await insertMood(mood);
-          alert("Mood saved!");
-          setMood("");
-        } catch (err) {
-          alert("Error saving Mood");
-          console.error(err);
-        }
+  // Load latest mood when app opens
+
+  useEffect(() => {
+    loadLatestMood();
+  }, []);
+
+  async function loadLatestMood() {
+    try {
+      const results = await getLastMood();
+      setLatestMood(results);
+    } catch (err) {
+      alert("Error fetching latest mood");
+      console.log(err);
     }
+  }
+
+  async function saveMood() {
+    try {
+      await insertMood(mood);
+      alert("Mood saved!");
+      setMood("");
+    } catch (err) {
+      alert("Error saving Mood");
+      console.error(err);
+    }
+  }
   return (
     <View style={styles.containers}>
-          <Text style={styles.title}>How are you feeling today?</Text>
-          <TextInput
-              style={styles.input}
-              placeholder='Write your mood ...'
-              value={mood}
-              onChangeText={setMood}
-          />
+      <Text style={styles.title}>How are you feeling today?</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Write your mood ..."
+        value={mood}
+        onChangeText={setMood}
+      />
 
-          <Button title='Save Mood' onPress={saveMood} />
+      <Button title="Save Mood" onPress={saveMood} />
 
+      {latestMood && (
+        <Text style={{ marginTop: 20 }}>Last Mood: {latestMood.text}</Text>
+      )}
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
     containers: {
