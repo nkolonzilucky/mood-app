@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput, Button } from 'react-native'
 import React, { useEffect, useState } from "react";
-import { getLastMood, insertMood } from "@/api/mood";
+import { deleteMoodById, getLastMood, insertMood } from "@/api/mood";
 import { Mood } from "@/types/supabase";
 
 
@@ -34,6 +34,19 @@ const App = () => {
       console.error(err);
     }
   }
+
+  async function handleDeleteMood() {
+    if (!latestMood) return;
+    try {
+      await deleteMoodById(latestMood.id);
+      setLatestMood(null);
+      alert("Last Mood deleted successfully");
+    } catch (error) {
+      alert("Error deleting last mood");
+      console.log(error);
+    }
+  }
+
   return (
     <View style={styles.containers}>
       <Text style={styles.title}>How are you feeling today?</Text>
@@ -47,7 +60,10 @@ const App = () => {
       <Button title="Save Mood" onPress={saveMood} />
 
       {latestMood && (
-        <Text style={{ marginTop: 20 }}>Last Mood: {latestMood.text}</Text>
+        <View>
+          <Text style={{ marginTop: 20 }}>Last Mood: {latestMood.text}</Text>
+          <Button title="Delete Last Mood" onPress={handleDeleteMood} />
+        </View>
       )}
     </View>
   );

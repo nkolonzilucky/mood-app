@@ -24,3 +24,10 @@ export async function getLastMood(): Promise<Mood | null> {
   }
   return data.length > 0 ? data[0] : null;
 }
+
+export async function deleteMoodById(id: number): Promise<void> {
+  const { error } = await supabase.from("moods").delete().eq("id", id);
+  if (error) {
+    throw error;
+  }
+}
