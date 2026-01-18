@@ -15,11 +15,13 @@ import {
 } from "@/api/mood";
 import { Mood } from "@/types/supabase";
 import { formatDate } from "@/utils/date";
+import { sendMagicLink } from "@/api/auth";
 
 const App = () => {
   const [mood, setMood] = useState("");
   const [latestMood, setLatestMood] = useState<Mood | null>(null);
   const [allMoods, setAllMoods] = useState<Mood[]>([]);
+  const [email, setEmail] = useState("");
 
   // Load latest mood when app opens
 
@@ -75,7 +77,31 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      <View style={{ marginTop: "50%" }}>
+      <View style={{ marginBottom: 20, marginTop: "25%" }}>
+        <Text style={{ marginBottom: 10, alignSelf: "center" }}>
+          Login With Email
+        </Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Your@email.example"
+          value={email}
+          onChangeText={setEmail}
+        />
+
+        <Button
+          title="Send login link"
+          onPress={async () => {
+            try {
+              await sendMagicLink(email);
+              alert("Check your emails for a login link");
+            } catch (err) {
+              alert("Error while sending login link");
+              console.log(err);
+            }
+          }}
+        />
+      </View>
+      <View style={{ marginTop: "10%" }}>
         <Text style={styles.title}>How are you feeling today?</Text>
         <TextInput
           style={styles.input}
