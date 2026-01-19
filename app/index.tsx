@@ -19,6 +19,7 @@ import { sendMagicLink } from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
 
+
 function LoginSection({
   email,
   setEmail,
@@ -218,3 +219,4 @@ const styles = StyleSheet.create({
 });
 
 export default App;
+
