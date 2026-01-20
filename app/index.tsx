@@ -133,7 +133,6 @@ const App = () => {
         setEditingId(null);
       } else {
         await insertMood(mood);
-        alert("Mood saved!");
       }
       setMood("");
       await loadAllMoods();
