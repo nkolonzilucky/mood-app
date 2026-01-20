@@ -133,6 +133,8 @@ const App = () => {
     try {
       await deleteMoodById(latestMood.id);
       setLatestMood(null);
+      loadLatestMood();
+      loadAllMoods();
       alert("Last Mood deleted successfully");
     } catch (error) {
       alert("Error deleting last mood");
