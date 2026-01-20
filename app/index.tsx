@@ -209,7 +209,11 @@ function MoodSection({
             ""
           )}
         </View>
-        <Button title="Delete Latest Mood" onPress={onDelete} />
+        <Button
+          disabled={!latestMood}
+          title="Delete Latest Mood"
+          onPress={onDelete}
+        />
       </View>
       {latestMood && (
         <MoodCard
