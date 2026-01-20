@@ -199,7 +199,9 @@ function MoodSection({
         <MoodCard text={latestMood.text} createdAt={latestMood.created_at} />
       )}
 
-      <Text style={{ fontWeight: "bold" }}>All Moods</Text>
+      <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 20 }}>
+        All Moods
+      </Text>
       <FlatList
         data={allMoods}
         keyExtractor={(item) => item.id.toString()}
@@ -248,7 +250,9 @@ const cardStyles = StyleSheet.create({
     width: "90%",
     padding: 16,
     borderRadius: 16,
-    backgroundColor: "#14b8a6", //bright teal
+    backgroundColor: "#2dd4bf", //bright teal
+    borderWidth: 1,
+    borderColor: "#0ec4b5",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 6 },
     shadowOpacity: 0.2,
