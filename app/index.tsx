@@ -1,13 +1,4 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  Button,
-  FlatList,
-  Pressable,
-  Alert,
-} from "react-native";
+import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   deleteMoodById,
@@ -17,13 +8,10 @@ import {
   updateMoodById,
 } from "@/api/mood";
 import { Mood } from "@/types/supabase";
-import { formatDate } from "@/utils/date";
 import { sendMagicLink } from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
-import Slider from "@react-native-community/slider";
-import { SliderSection } from "@/components/SliderSection";
-import { moodEmoji } from "@/constants/moodEmojis";
+import { MoodSection } from "@/components/MoodSection";
 
 
 
@@ -186,181 +174,6 @@ const App = () => {
     </View>
   );
 };
-
-function MoodSection({
-  mood,
-  setMood,
-  latestMood,
-  allMoods,
-  onSave,
-  onDelete,
-  editingId,
-  setEditingId,
-  level,
-  setLevel,
-}: {
-  mood: string | null;
-  setMood: (v: string | null) => void;
-  latestMood: Mood | null;
-  allMoods: Mood[];
-  onSave: () => Promise<void>;
-  onDelete: () => Promise<void>;
-  editingId: number | null;
-  setEditingId: (v: number | null) => void;
-  level: number;
-  setLevel: (v: number) => void;
-}) {
-  const [newMoodInProgress, setNewMoodInProgress] = useState(false);
-  return (
-    <>
-      <View style={{ justifyContent: "center", marginBottom: 20 }}>
-        <Text style={styles.title}>How are you feeling right now?</Text>
-        <SliderSection
-          newMoodInProgress={newMoodInProgress}
-          setNewMoodInProgress={setNewMoodInProgress}
-          level={level}
-          setLevel={setLevel}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="What happened?"
-          value={mood ? mood : undefined}
-          onChangeText={setMood}
-          returnKeyType="done"
-          onSubmitEditing={onSave}
-          autoFocus
-        />
-        <View style={{ flexDirection: "row", justifyContent: "center" }}>
-          <Button
-            disabled={!mood}
-            title={editingId ? "Update Mood" : "Save Mood"}
-            onPress={() => {
-              onSave();
-              setNewMoodInProgress(false);
-            }}
-          />
-          {editingId ? (
-            <Button
-              title="Cancel"
-              onPress={() => {
-                setEditingId(null);
-                setMood("");
-                setLevel(4);
-                setNewMoodInProgress(false);
-              }}
-            />
-          ) : (
-            ""
-          )}
-        </View>
-        <Button
-          disabled={!latestMood}
-          title="Delete Latest Mood"
-          onPress={() => {
-            onDelete();
-            setNewMoodInProgress(false);
-          }}
-        />
-      </View>
-      {latestMood && (
-        <MoodCard
-          text={latestMood.text}
-          emoji={moodEmoji(latestMood.level)[0]}
-          createdAt={latestMood.created_at}
-          onPress={() => {
-            setMood(latestMood.text);
-            setEditingId(latestMood.id);
-            setLevel(latestMood.level);
-            setNewMoodInProgress(true);
-          }}
-        />
-      )}
-
-      <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 20 }}>
-        All Moods
-      </Text>
-      <FlatList
-        data={allMoods}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ paddingBottom: 40, paddingTop: 8 }}
-        renderItem={({ item }) => (
-          <MoodCard
-            text={item.text}
-            emoji={moodEmoji(item.level)[0]}
-            createdAt={item.created_at}
-            onPress={() => {
-              setMood(item.text);
-              setEditingId(item.id);
-              setLevel(item.level);
-              setNewMoodInProgress(true);
-            }}
-          />
-        )}
-      />
-    </>
-  );
-}
-
-function MoodCard({
-  text,
-  emoji,
-  createdAt,
-  onPress,
-}: {
-  text: string | null;
-  emoji: string;
-  createdAt: string;
-  onPress?: () => void;
-}) {
-  return (
-    <Pressable style={cardStyles.cardWrapper} onPress={onPress}>
-      <View style={cardStyles.card}>
-        <Text style={{ fontSize: 28 }}>{emoji}</Text>
-        <Text style={cardStyles.moodText}>{text || "No reflection"}</Text>
-        <Text style={cardStyles.timeText}>{formatDate(createdAt)}</Text>
-        <Text style={cardStyles.tapHint}>Tap to Edit</Text>
-      </View>
-    </Pressable>
-  );
-}
-
-
-const cardStyles = StyleSheet.create({
-  cardWrapper: {
-    marginVertical: 8,
-    alignItems: "center",
-  },
-  card: {
-    width: "90%",
-    padding: 16,
-    borderRadius: 16,
-    backgroundColor: "#2dd4bf", //bright teal
-    borderWidth: 1,
-    borderColor: "#0ec4b5",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    elevation: 6,
-  },
-  moodText: {
-    color: "white",
-    fontSize: 18,
-    fontWeight: "600",
-    marginBottom: 6,
-  },
-  timeText: {
-    color: "#e6fffa", //very light teal
-    fontSize: 12,
-    marginBottom: 8,
-  },
-  tapHint: {
-    color: "#ccfbf1",
-    fontSize: 11,
-    opacity: 0.8,
-  },
-});
-
 
 
 const styles = StyleSheet.create({
