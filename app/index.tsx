@@ -22,18 +22,10 @@ import { sendMagicLink } from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
 import Slider from "@react-native-community/slider";
+import { SliderSection } from "@/components/SliderSection";
+import { moodEmoji } from "@/constants/moodEmojis";
 
-const moodEmoji = (level: number) => {
-  const map = {
-    0: ["🤮😢", "very bad", "what are your symptoms?"],
-    1: ["😢", "crying", "what made you cry?"],
-    2: ["🙁", "sad", "why are you sad?"],
-    3: ["😐", "neutral", "what can be improved to make you happy?"],
-    4: ["🙂", "what made you so happy right now? :)"],
-    5: ["🤩", "What are you celebrating right now? :)"],
-  };
-  return map[level as keyof typeof map];
-};
+
 
 function LoginSection({
   email,
@@ -332,55 +324,6 @@ function MoodCard({
   );
 }
 
-function SliderSection({
-  level,
-  setLevel,
-  newMoodInProgress,
-  setNewMoodInProgress,
-}: {
-  level: number;
-  setLevel: (v: number) => void;
-  newMoodInProgress: boolean;
-  setNewMoodInProgress: (v: boolean) => void;
-}) {
-  return (
-    <View style={sliderStyles.sliderContainer}>
-      <Text style={sliderStyles.emoji}>{moodEmoji(level)[0]}</Text>
-      <Slider
-        style={{ width: "90%", height: 40, borderColor: "black" }}
-        minimumValue={0}
-        maximumValue={5}
-        step={1}
-        value={level}
-        onValueChange={setLevel}
-        minimumTrackTintColor={newMoodInProgress ? "#14b8a6" : "#e5e7eb"}
-        maximumTrackTintColor="#e5e7eb"
-        thumbTintColor="#0d9488"
-        onSlidingStart={(v) => setNewMoodInProgress(true)}
-      />
-      {/* <Text style={sliderStyles.levelLabel}>
-        Use the slider select your emoji
-      </Text> */}
-    </View>
-  );
-}
-
-const sliderStyles = StyleSheet.create({
-  sliderContainer: {
-    alignItems: "center",
-    marginVertical: 16,
-  },
-  emoji: {
-    fontSize: 40,
-    marginBottom: 8,
-  },
-  levelLabel: {
-    marginTop: 2,
-    color: "gray",
-    fontSize: 12,
-    fontWeight: "light",
-  },
-});
 
 const cardStyles = StyleSheet.create({
   cardWrapper: {
