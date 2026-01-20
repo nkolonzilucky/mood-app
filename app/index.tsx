@@ -23,6 +23,17 @@ import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
 import Slider from "@react-native-community/slider";
 
+const moodEmoji = (level: number) => {
+  const map = {
+    0: ["🤮😢", "very bad", "what are your symptoms?"],
+    1: ["😢", "crying", "what made you cry?"],
+    2: ["🙁", "sad", "why are you sad?"],
+    3: ["😐", "neutral", "what can be improved to make you happy?"],
+    4: ["🙂", "what made you so happy right now? :)"],
+    5: ["🤩", "What are you celebrating right now? :)"],
+  };
+  return map[level as keyof typeof map];
+};
 
 function LoginSection({
   email,
@@ -250,6 +261,7 @@ function MoodSection({
       {latestMood && (
         <MoodCard
           text={latestMood.text}
+          emoji={moodEmoji(latestMood.level)[0]}
           createdAt={latestMood.created_at}
           onPress={() => {
             setMood(latestMood.text);
@@ -269,6 +281,7 @@ function MoodSection({
         renderItem={({ item }) => (
           <MoodCard
             text={item.text}
+            emoji={moodEmoji(item.level)[0]}
             createdAt={item.created_at}
             onPress={() => {
               setMood(item.text);
@@ -284,17 +297,20 @@ function MoodSection({
 
 function MoodCard({
   text,
+  emoji,
   createdAt,
   onPress,
 }: {
   text: string | null;
+  emoji: string;
   createdAt: string;
   onPress?: () => void;
 }) {
   return (
     <Pressable style={cardStyles.cardWrapper} onPress={onPress}>
       <View style={cardStyles.card}>
-        <Text style={cardStyles.moodText}>{text}</Text>
+        <Text style={{ fontSize: 28 }}>{emoji}</Text>
+        <Text style={cardStyles.moodText}>{text || "No reflection"}</Text>
         <Text style={cardStyles.timeText}>{formatDate(createdAt)}</Text>
         <Text style={cardStyles.tapHint}>Tap to Edit</Text>
       </View>
@@ -309,18 +325,6 @@ function SliderSection({
   level: number;
   setLevel: (v: number) => void;
 }) {
-  const moodEmoji = (level: number) => {
-    const map = {
-      0: ["🤮😢", "very bad", "what are your symptoms?"],
-      1: ["😢", "crying", "what made you cry?"],
-      2: ["🙁", "sad", "why are you sad?"],
-      3: ["😐", "neutral", "what can be improved to make you happy?"],
-      4: ["🙂", "what made you so happy right now? :)"],
-      5: ["🤩", "What are you celebrating right now? :)"],
-    };
-    return map[level as keyof typeof map];
-  };
-
   return (
     <View style={sliderStyles.sliderContainer}>
       <Text style={sliderStyles.emoji}>{moodEmoji(level)[0]}</Text>
