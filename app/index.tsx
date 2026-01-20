@@ -21,6 +21,7 @@ import { formatDate } from "@/utils/date";
 import { sendMagicLink } from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
+import Slider from "@react-native-community/slider";
 
 
 function LoginSection({
@@ -79,17 +80,7 @@ const App = () => {
     getSession();
   }, []);
 
-  const moodEmoji = (level: number) => {
-    const map = {
-      0: ["🤮😢", "very bad", "what are your symptoms?"],
-      1: ["😢", "crying", "what made you cry?"],
-      2: ["🙁", "sad", "why are you sad?"],
-      3: ["😐", "neutral", "what can be improved to make you happy?"],
-      4: ["🙂", "what made you so happy right now? :)"],
-      5: ["🤩", "What are you celebrating right now? :)"],
-    };
-    return map[level as keyof typeof map];
-  };
+
 
   async function getSession() {
     supabase.auth.getSession().then(({ data }) => {
@@ -185,6 +176,8 @@ const App = () => {
           onDelete={() => confirmDelete(latestMood?.id)}
           editingId={editingId}
           setEditingId={setEditingId}
+          level={level}
+          setLevel={setLevel}
         />
       )}
     </View>
@@ -200,6 +193,8 @@ function MoodSection({
   onDelete,
   editingId,
   setEditingId,
+  level,
+  setLevel,
 }: {
   mood: string | null;
   setMood: (v: string | null) => void;
@@ -209,11 +204,14 @@ function MoodSection({
   onDelete: () => Promise<void>;
   editingId: number | null;
   setEditingId: (v: number | null) => void;
+  level: number;
+  setLevel: (v: number) => void;
 }) {
   return (
     <>
       <View style={{ justifyContent: "center", marginBottom: 20 }}>
         <Text style={styles.title}>How are you feeling today?</Text>
+        <SliderSection level={level} setLevel={setLevel} />
         <TextInput
           style={styles.input}
           placeholder="Write your mood..."
@@ -298,6 +296,61 @@ function MoodCard({
     </Pressable>
   );
 }
+
+function SliderSection({
+  level,
+  setLevel,
+}: {
+  level: number;
+  setLevel: (v: number) => void;
+}) {
+  const moodEmoji = (level: number) => {
+    const map = {
+      0: ["🤮😢", "very bad", "what are your symptoms?"],
+      1: ["😢", "crying", "what made you cry?"],
+      2: ["🙁", "sad", "why are you sad?"],
+      3: ["😐", "neutral", "what can be improved to make you happy?"],
+      4: ["🙂", "what made you so happy right now? :)"],
+      5: ["🤩", "What are you celebrating right now? :)"],
+    };
+    return map[level as keyof typeof map];
+  };
+
+  return (
+    <View style={sliderStyles.sliderContainer}>
+      <Text style={sliderStyles.emoji}>{moodEmoji(level)[0]}</Text>
+      <Slider
+        style={{ width: "90%", height: 40 }}
+        minimumValue={0}
+        maximumValue={5}
+        step={1}
+        value={level}
+        onValueChange={setLevel}
+        minimumTrackTintColor="#14b8a6"
+        maximumTrackTintColor="#e5e7eb"
+        thumbTintColor="#0d9488"
+      />
+
+      {/* <Text style={sliderStyles.levelLabel}>Level: {level}</Text> */}
+    </View>
+  );
+}
+
+const sliderStyles = StyleSheet.create({
+  sliderContainer: {
+    alignItems: "center",
+    marginVertical: 16,
+  },
+  emoji: {
+    fontSize: 40,
+    marginBottom: 8,
+  },
+  levelLabel: {
+    marginTop: 8,
+    fontSize: 16,
+    fontWeight: "600",
+  },
+});
 
 const cardStyles = StyleSheet.create({
   cardWrapper: {
