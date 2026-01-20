@@ -6,6 +6,7 @@ import {
   Button,
   FlatList,
   Pressable,
+  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -90,6 +91,21 @@ const App = () => {
     });
     return () => subscription.unsubscribe();
   }
+
+  async function confirmDelete(id: number | undefined) {
+    Alert.alert("Delete Mood?", "Are you sure?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      {
+        text: "Delete",
+        style: "destructive",
+        onPress: () => handleDeleteMood(id),
+      },
+    ]);
+  }
+
   async function loadAllMoods() {
     try {
       const data = await getAllMoods();
@@ -128,10 +144,10 @@ const App = () => {
     }
   }
 
-  async function handleDeleteMood() {
-    if (!latestMood) return;
+  async function handleDeleteMood(id: number | undefined) {
+    if (!latestMood || !id) return;
     try {
-      await deleteMoodById(latestMood.id);
+      await deleteMoodById(id);
       setLatestMood(null);
       loadLatestMood();
       loadAllMoods();
@@ -153,7 +169,7 @@ const App = () => {
           latestMood={latestMood}
           allMoods={allMoods}
           onSave={saveMood}
-          onDelete={handleDeleteMood}
+          onDelete={() => confirmDelete(latestMood?.id)}
           editingId={editingId}
           setEditingId={setEditingId}
         />
