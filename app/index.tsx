@@ -5,6 +5,7 @@ import {
   TextInput,
   Button,
   FlatList,
+  Pressable,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
@@ -58,68 +59,7 @@ function LoginSection({
   );
 }
 
-function MoodSection({
-  mood,
-  setMood,
-  latestMood,
-  allMoods,
-  onSave,
-  onDelete,
-  editingId,
-  setEditingId,
-}: {
-  mood: string;
-  setMood: (v: string) => void;
-  latestMood: Mood | null;
-  allMoods: Mood[];
-  onSave: () => Promise<void>;
-  onDelete: () => Promise<void>;
-  editingId: number | null;
-  setEditingId: (v: number | null) => void;
-}) {
-  return (
-    <>
-      <View style={{ justifyContent: "center", marginBottom: 20 }}>
-        <Text style={styles.title}>How are you feeling today?</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Write your mood..."
-          value={mood}
-          onChangeText={setMood}
-        />
-        <Button
-          title={editingId ? "Update Mood" : "Save Mood"}
-          onPress={onSave}
-        />
-        <Button title="Delete Latest Mood" onPress={onDelete} />
-      </View>
-      {latestMood && (
-        <Text style={{ marginBottom: 20 }}>
-          Last Mood {latestMood.text} {"\n"} At:{" "}
-          {formatDate(latestMood.created_at)}
-        </Text>
-      )}
 
-      <Text style={{ fontWeight: "bold" }}>All Moods</Text>
-      <FlatList
-        data={allMoods}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={{ padding: 10 }}
-        renderItem={({ item }) => (
-          <Text
-            style={{ marginVertical: 4 }}
-            onPress={() => {
-              setMood(item.text);
-              setEditingId(item.id);
-            }}
-          >
-            • {item.text} - {formatDate(item.created_at)}
-          </Text>
-        )}
-      />
-    </>
-  );
-}
 
 const App = () => {
   const [mood, setMood] = useState("");
@@ -219,6 +159,121 @@ const App = () => {
     </View>
   );
 };
+
+function MoodSection({
+  mood,
+  setMood,
+  latestMood,
+  allMoods,
+  onSave,
+  onDelete,
+  editingId,
+  setEditingId,
+}: {
+  mood: string;
+  setMood: (v: string) => void;
+  latestMood: Mood | null;
+  allMoods: Mood[];
+  onSave: () => Promise<void>;
+  onDelete: () => Promise<void>;
+  editingId: number | null;
+  setEditingId: (v: number | null) => void;
+}) {
+  return (
+    <>
+      <View style={{ justifyContent: "center", marginBottom: 20 }}>
+        <Text style={styles.title}>How are you feeling today?</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Write your mood..."
+          value={mood}
+          onChangeText={setMood}
+        />
+        <Button
+          title={editingId ? "Update Mood" : "Save Mood"}
+          onPress={onSave}
+        />
+        <Button title="Delete Latest Mood" onPress={onDelete} />
+      </View>
+      {latestMood && (
+        <MoodCard text={latestMood.text} createdAt={latestMood.created_at} />
+      )}
+
+      <Text style={{ fontWeight: "bold" }}>All Moods</Text>
+      <FlatList
+        data={allMoods}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={{ paddingBottom: 40, paddingTop: 8 }}
+        renderItem={({ item }) => (
+          <MoodCard
+            text={item.text}
+            createdAt={item.created_at}
+            onPress={() => {
+              setMood(item.text);
+              setEditingId(item.id);
+            }}
+          />
+        )}
+      />
+    </>
+  );
+}
+
+function MoodCard({
+  text,
+  createdAt,
+  onPress,
+}: {
+  text: string;
+  createdAt: string;
+  onPress?: () => void;
+}) {
+  return (
+    <Pressable style={cardStyles.cardWrapper} onPress={onPress}>
+      <View style={cardStyles.card}>
+        <Text style={cardStyles.moodText}>{text}</Text>
+        <Text style={cardStyles.timeText}>{formatDate(createdAt)}</Text>
+        <Text style={cardStyles.tapHint}>Tap to Edit</Text>
+      </View>
+    </Pressable>
+  );
+}
+
+const cardStyles = StyleSheet.create({
+  cardWrapper: {
+    marginVertical: 8,
+    alignItems: "center",
+  },
+  card: {
+    width: "90%",
+    padding: 16,
+    borderRadius: 16,
+    backgroundColor: "#14b8a6", //bright teal
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 6,
+  },
+  moodText: {
+    color: "white",
+    fontSize: 18,
+    fontWeight: "600",
+    marginBottom: 6,
+  },
+  timeText: {
+    color: "#e6fffa", //very light teal
+    fontSize: 12,
+    marginBottom: 8,
+  },
+  tapHint: {
+    color: "#ccfbf1",
+    fontSize: 11,
+    opacity: 0.8,
+  },
+});
+
+
 
 const styles = StyleSheet.create({
   container: {
