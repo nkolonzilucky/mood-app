@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   deleteMoodById,
@@ -8,58 +8,16 @@ import {
   updateMoodById,
 } from "@/api/mood";
 import { Mood } from "@/types/supabase";
-import { sendMagicLink } from "@/api/auth";
 import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/supabase";
 import { MoodSection } from "@/components/MoodSection";
-
-
-
-function LoginSection({
-  email,
-  setEmail,
-}: {
-  email: string;
-  setEmail: (v: string) => void;
-}) {
-  return (
-    <View style={{ justifyContent: "center" }}>
-      <Text style={{ marginBottom: 8, alignSelf: "center" }}>
-        Login with email
-      </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="your@email.example"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <Button
-        title="Send magic link"
-        onPress={async () => {
-          try {
-            await sendMagicLink(email);
-            alert("Check your emails");
-          } catch (error) {
-            alert("Error while sending link");
-            console.log(error);
-          }
-        }}
-      />
-    </View>
-  );
-}
-
-
+import AuthScreen from "@/components/AuthScreen";
 
 const App = () => {
   const [mood, setMood] = useState<string | null>("");
   const [level, setLevel] = useState(4);
   const [latestMood, setLatestMood] = useState<Mood | null>(null);
   const [allMoods, setAllMoods] = useState<Mood[]>([]);
-  const [email, setEmail] = useState("");
   const [session, setSession] = useState<Session | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
 
@@ -152,29 +110,27 @@ const App = () => {
       console.log(error);
     }
   }
+  if (!session) {
+    return <AuthScreen onAuthSuccess={() => {}} />;
+  }
 
   return (
     <View style={styles.container}>
-      {session ? (
-        <LoginSection email={email} setEmail={setEmail} />
-      ) : (
-        <MoodSection
-          mood={mood}
-          setMood={setMood}
-          latestMood={latestMood}
-          allMoods={allMoods}
-          onSave={saveMood}
-          onDelete={() => confirmDelete(latestMood?.id)}
-          editingId={editingId}
-          setEditingId={setEditingId}
-          level={level}
-          setLevel={setLevel}
-        />
-      )}
+      <MoodSection
+        mood={mood}
+        setMood={setMood}
+        latestMood={latestMood}
+        allMoods={allMoods}
+        onSave={saveMood}
+        onDelete={() => confirmDelete(latestMood?.id)}
+        editingId={editingId}
+        setEditingId={setEditingId}
+        level={level}
+        setLevel={setLevel}
+      />
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -182,18 +138,6 @@ const styles = StyleSheet.create({
     padding: 20,
     marginTop: "25%",
   },
-  title: {
-    fontSize: 18,
-    alignSelf: "center",
-  },
-  input: {
-    borderWidth: 1,
-    padding: 10,
-    marginBottom: 10,
-    borderRadius: 16,
-    textAlign: "center",
-  },
 });
 
 export default App;
-
