@@ -47,7 +47,7 @@ export async function updateMoodById(
 ): Promise<void> {
   const { error } = await supabase
     .from("moods")
-    .update({ text: newText })
+    .update({ text: newText } as never)
     .eq("id", id);
   if (error) throw error;
 }
