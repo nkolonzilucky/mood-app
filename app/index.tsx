@@ -12,6 +12,7 @@ import {
   getAllMoods,
   getLastMood,
   insertMood,
+  updateMoodById,
 } from "@/api/mood";
 import { Mood } from "@/types/supabase";
 import { formatDate } from "@/utils/date";
@@ -64,6 +65,8 @@ function MoodSection({
   allMoods,
   onSave,
   onDelete,
+  editingId,
+  setEditingId,
 }: {
   mood: string;
   setMood: (v: string) => void;
@@ -71,6 +74,8 @@ function MoodSection({
   allMoods: Mood[];
   onSave: () => Promise<void>;
   onDelete: () => Promise<void>;
+  editingId: number | null;
+  setEditingId: (v: number | null) => void;
 }) {
   return (
     <>
@@ -82,7 +87,10 @@ function MoodSection({
           value={mood}
           onChangeText={setMood}
         />
-        <Button title="Save Mood" onPress={onSave} />
+        <Button
+          title={editingId ? "Update Mood" : "Save Mood"}
+          onPress={onSave}
+        />
         <Button title="Delete Latest Mood" onPress={onDelete} />
       </View>
       {latestMood && (
@@ -98,7 +106,13 @@ function MoodSection({
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ padding: 10 }}
         renderItem={({ item }) => (
-          <Text style={{ marginVertical: 4 }}>
+          <Text
+            style={{ marginVertical: 4 }}
+            onPress={() => {
+              setMood(item.text);
+              setEditingId(item.id);
+            }}
+          >
             • {item.text} - {formatDate(item.created_at)}
           </Text>
         )}
@@ -113,6 +127,7 @@ const App = () => {
   const [allMoods, setAllMoods] = useState<Mood[]>([]);
   const [email, setEmail] = useState("");
   const [session, setSession] = useState<Session | null>(null);
+  const [editingId, setEditingId] = useState<number | null>(null);
 
   // Load latest mood when app opens
 
@@ -157,8 +172,13 @@ const App = () => {
 
   async function saveMood() {
     try {
-      await insertMood(mood);
-      alert("Mood saved!");
+      if (editingId) {
+        await updateMoodById(editingId, mood);
+        setEditingId(null);
+      } else {
+        await insertMood(mood);
+        alert("Mood saved!");
+      }
       setMood("");
       await loadAllMoods();
       await loadLatestMood();
@@ -182,7 +202,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
-      {!session ? (
+      {session ? (
         <LoginSection email={email} setEmail={setEmail} />
       ) : (
         <MoodSection
@@ -192,6 +212,8 @@ const App = () => {
           allMoods={allMoods}
           onSave={saveMood}
           onDelete={handleDeleteMood}
+          editingId={editingId}
+          setEditingId={setEditingId}
         />
       )}
     </View>

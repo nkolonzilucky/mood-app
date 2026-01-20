@@ -40,3 +40,14 @@ export async function getAllMoods(): Promise<Mood[]> {
   if (error) throw error;
   return data ?? [];
 }
+
+export async function updateMoodById(
+  id: number,
+  newText: string,
+): Promise<void> {
+  const { error } = await supabase
+    .from("moods")
+    .update({ text: newText })
+    .eq("id", id);
+  if (error) throw error;
+}
