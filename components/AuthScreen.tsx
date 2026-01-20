@@ -38,7 +38,8 @@ const AuthScreen = ({ onAuthSuccess }: { onAuthSuccess: () => void }) => {
         setLoading(false)
 
         if (error) {
-            setError(error.message)
+          setError(error.message);
+          alert("There was an error signing up");
         } else {
             onAuthSuccess()
         }

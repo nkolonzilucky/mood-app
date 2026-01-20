@@ -1,13 +1,18 @@
 import { supabase } from "@/supabase";
 import { Mood } from "@/types/supabase";
+import { use } from "react";
 
 export async function insertMood(
   text: string | null,
   level: number,
 ): Promise<Mood[]> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw Error("No authenticated user.");
   const { data, error } = await supabase
     .from("moods")
-    .insert({ text, level } as any)
+    .insert({ text, level, user_id: user?.id } as any)
     .select();
   if (error) {
     throw error;
@@ -17,15 +22,24 @@ export async function insertMood(
 }
 
 export async function getLastMood(): Promise<Mood | null> {
-  const { data, error } = await supabase
-    .from("moods")
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(1);
-  if (error) {
-    throw error;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    throw Error("No Authenticated user");
   }
-  return data.length > 0 ? data[0] : null;
+    const { data, error } = await supabase
+      .from("moods")
+      .select("*")
+      .eq("user_id", user?.id)
+      .order("created_at", { ascending: false })
+      .limit(1);
+    if (error) {
+      throw error;
+    }
+    return data.length > 0 ? data[0] : null;
+
 }
 
 export async function deleteMoodById(id: number): Promise<void> {
@@ -36,9 +50,16 @@ export async function deleteMoodById(id: number): Promise<void> {
 }
 
 export async function getAllMoods(): Promise<Mood[]> {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) {
+    throw Error("Now Authenticated user");
+  }
   const { data, error } = await supabase
     .from("moods")
     .select("*")
+    .eq("user_id", user?.id)
     .order("created_at", { ascending: false });
   if (error) throw error;
   return data ?? [];

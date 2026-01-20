@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Button } from "react-native";
 import React, { useEffect, useState } from "react";
 import {
   deleteMoodById,
@@ -24,10 +24,13 @@ const App = () => {
   // Load latest mood when app opens
 
   useEffect(() => {
-    loadLatestMood();
-    loadAllMoods();
-    getSession();
-  }, []);
+    if (session) {
+      loadLatestMood();
+      loadAllMoods();
+    } else {
+      getSession();
+    }
+  }, [session]);
 
   async function getSession() {
     supabase.auth.getSession().then(({ data }) => {
@@ -127,6 +130,11 @@ const App = () => {
         setEditingId={setEditingId}
         level={level}
         setLevel={setLevel}
+      />
+
+      <Button
+        title="Sign Out"
+        onPress={async () => await supabase.auth.signOut()}
       />
     </View>
   );

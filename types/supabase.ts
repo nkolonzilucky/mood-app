@@ -3,6 +3,7 @@ export type Mood = {
   text: string | null;
   created_at: string;
   level: number;
+  user_id: string;
 };
 
 // Database schema type
@@ -14,6 +15,7 @@ export type Database = {
         Insert: {
           text?: string | null | undefined; //what you are allowed to insert
           level: number;
+          user_id: string;
         };
         Update: {
           text?: string | null; //what you are allowed to update
