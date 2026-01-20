@@ -1,10 +1,13 @@
 import { supabase } from "@/supabase";
 import { Mood } from "@/types/supabase";
 
-export async function insertMood(text: string): Promise<Mood[]> {
+export async function insertMood(
+  text: string | null,
+  level: number,
+): Promise<Mood[]> {
   const { data, error } = await supabase
     .from("moods")
-    .insert({ text } as any)
+    .insert({ text, level } as any)
     .select();
   if (error) {
     throw error;
@@ -43,11 +46,12 @@ export async function getAllMoods(): Promise<Mood[]> {
 
 export async function updateMoodById(
   id: number,
-  newText: string,
+  newText: string | null,
+  level: number,
 ): Promise<void> {
   const { error } = await supabase
     .from("moods")
-    .update({ text: newText } as never)
+    .update({ text: newText, level: level } as never)
     .eq("id", id);
   if (error) throw error;
 }

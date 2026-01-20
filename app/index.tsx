@@ -63,7 +63,8 @@ function LoginSection({
 
 
 const App = () => {
-  const [mood, setMood] = useState("");
+  const [mood, setMood] = useState<string | null>("");
+  const [level, setLevel] = useState(3);
   const [latestMood, setLatestMood] = useState<Mood | null>(null);
   const [allMoods, setAllMoods] = useState<Mood[]>([]);
   const [email, setEmail] = useState("");
@@ -77,6 +78,18 @@ const App = () => {
     loadAllMoods();
     getSession();
   }, []);
+
+  const moodEmoji = (level: number) => {
+    const map = {
+      0: ["🤮😢", "very bad", "what are your symptoms?"],
+      1: ["😢", "crying", "what made you cry?"],
+      2: ["🙁", "sad", "why are you sad?"],
+      3: ["😐", "neutral", "what can be improved to make you happy?"],
+      4: ["🙂", "what made you so happy right now? :)"],
+      5: ["🤩", "What are you celebrating right now? :)"],
+    };
+    return map[level as keyof typeof map];
+  };
 
   async function getSession() {
     supabase.auth.getSession().then(({ data }) => {
@@ -129,10 +142,10 @@ const App = () => {
   async function saveMood() {
     try {
       if (editingId) {
-        await updateMoodById(editingId, mood);
+        await updateMoodById(editingId, mood, level);
         setEditingId(null);
       } else {
-        await insertMood(mood);
+        await insertMood(mood, level);
       }
       setMood("");
       await loadAllMoods();
@@ -188,8 +201,8 @@ function MoodSection({
   editingId,
   setEditingId,
 }: {
-  mood: string;
-  setMood: (v: string) => void;
+  mood: string | null;
+  setMood: (v: string | null) => void;
   latestMood: Mood | null;
   allMoods: Mood[];
   onSave: () => Promise<void>;
@@ -204,7 +217,7 @@ function MoodSection({
         <TextInput
           style={styles.input}
           placeholder="Write your mood..."
-          value={mood}
+          value={mood ? mood : undefined}
           onChangeText={setMood}
           returnKeyType="done"
           onSubmitEditing={onSave}
@@ -271,7 +284,7 @@ function MoodCard({
   createdAt,
   onPress,
 }: {
-  text: string;
+  text: string | null;
   createdAt: string;
   onPress?: () => void;
 }) {
