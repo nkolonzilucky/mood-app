@@ -212,7 +212,14 @@ function MoodSection({
         <Button title="Delete Latest Mood" onPress={onDelete} />
       </View>
       {latestMood && (
-        <MoodCard text={latestMood.text} createdAt={latestMood.created_at} />
+        <MoodCard
+          text={latestMood.text}
+          createdAt={latestMood.created_at}
+          onPress={() => {
+            setMood(latestMood.text);
+            setEditingId(latestMood.id);
+          }}
+        />
       )}
 
       <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 20 }}>
