@@ -236,6 +236,7 @@ function MoodSection({
           onChangeText={setMood}
           returnKeyType="done"
           onSubmitEditing={onSave}
+          autoFocus
         />
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <Button
