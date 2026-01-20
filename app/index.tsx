@@ -193,6 +193,7 @@ function MoodSection({
         />
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <Button
+            disabled={!mood}
             title={editingId ? "Update Mood" : "Save Mood"}
             onPress={onSave}
           />
