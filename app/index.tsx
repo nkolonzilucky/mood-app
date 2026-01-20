@@ -139,6 +139,7 @@ const App = () => {
         await insertMood(mood, level);
       }
       setMood("");
+      setLevel(3);
       await loadAllMoods();
       await loadLatestMood();
     } catch (err) {
@@ -153,6 +154,7 @@ const App = () => {
       await deleteMoodById(id);
       setLatestMood(null);
       setMood("");
+      setLevel(3);
       setEditingId(null);
       loadLatestMood();
       loadAllMoods();
@@ -232,6 +234,7 @@ function MoodSection({
               onPress={() => {
                 setEditingId(null);
                 setMood("");
+                setLevel(3);
               }}
             />
           ) : (
@@ -251,6 +254,7 @@ function MoodSection({
           onPress={() => {
             setMood(latestMood.text);
             setEditingId(latestMood.id);
+            setLevel(latestMood.level);
           }}
         />
       )}
@@ -269,6 +273,7 @@ function MoodSection({
             onPress={() => {
               setMood(item.text);
               setEditingId(item.id);
+              setLevel(item.level);
             }}
           />
         )}
