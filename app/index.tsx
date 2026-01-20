@@ -149,6 +149,7 @@ const App = () => {
     try {
       await deleteMoodById(id);
       setLatestMood(null);
+      setMood("");
       loadLatestMood();
       loadAllMoods();
       alert("Last Mood deleted successfully");
