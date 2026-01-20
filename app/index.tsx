@@ -325,19 +325,21 @@ function SliderSection({
   level: number;
   setLevel: (v: number) => void;
 }) {
+  const [newMoodInProgress, setNewMoodInProgress] = useState(false);
   return (
     <View style={sliderStyles.sliderContainer}>
       <Text style={sliderStyles.emoji}>{moodEmoji(level)[0]}</Text>
       <Slider
-        style={{ width: "90%", height: 40 }}
+        style={{ width: "90%", height: 40, borderColor: "black" }}
         minimumValue={0}
         maximumValue={5}
         step={1}
         value={level}
         onValueChange={setLevel}
-        minimumTrackTintColor="#14b8a6"
+        minimumTrackTintColor={newMoodInProgress ? "#14b8a6" : "#e5e7eb"}
         maximumTrackTintColor="#e5e7eb"
-        thumbTintColor="#0d9488"
+        thumbTintColor={newMoodInProgress ? "#0d9488" : "#e5e7eb"}
+        onSlidingStart={(v) => setNewMoodInProgress(true)}
       />
 
       {/* <Text style={sliderStyles.levelLabel}>Level: {level}</Text> */}
