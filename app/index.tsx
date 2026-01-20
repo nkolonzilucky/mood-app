@@ -76,7 +76,7 @@ function LoginSection({
 
 const App = () => {
   const [mood, setMood] = useState<string | null>("");
-  const [level, setLevel] = useState(3);
+  const [level, setLevel] = useState(4);
   const [latestMood, setLatestMood] = useState<Mood | null>(null);
   const [allMoods, setAllMoods] = useState<Mood[]>([]);
   const [email, setEmail] = useState("");
@@ -148,7 +148,7 @@ const App = () => {
         await insertMood(mood, level);
       }
       setMood("");
-      setLevel(3);
+      setLevel(4);
       await loadAllMoods();
       await loadLatestMood();
     } catch (err) {
@@ -163,7 +163,7 @@ const App = () => {
       await deleteMoodById(id);
       setLatestMood(null);
       setMood("");
-      setLevel(3);
+      setLevel(4);
       setEditingId(null);
       loadLatestMood();
       loadAllMoods();
@@ -222,7 +222,7 @@ function MoodSection({
   return (
     <>
       <View style={{ justifyContent: "center", marginBottom: 20 }}>
-        <Text style={styles.title}>How are you feeling today?</Text>
+        <Text style={styles.title}>How are you feeling right now?</Text>
         <SliderSection
           newMoodInProgress={newMoodInProgress}
           setNewMoodInProgress={setNewMoodInProgress}
@@ -231,7 +231,7 @@ function MoodSection({
         />
         <TextInput
           style={styles.input}
-          placeholder="Write your mood..."
+          placeholder="What happened?"
           value={mood ? mood : undefined}
           onChangeText={setMood}
           returnKeyType="done"
@@ -253,7 +253,7 @@ function MoodSection({
               onPress={() => {
                 setEditingId(null);
                 setMood("");
-                setLevel(3);
+                setLevel(4);
                 setNewMoodInProgress(false);
               }}
             />
@@ -355,11 +355,12 @@ function SliderSection({
         onValueChange={setLevel}
         minimumTrackTintColor={newMoodInProgress ? "#14b8a6" : "#e5e7eb"}
         maximumTrackTintColor="#e5e7eb"
-        thumbTintColor={newMoodInProgress ? "#0d9488" : "#e5e7eb"}
+        thumbTintColor="#0d9488"
         onSlidingStart={(v) => setNewMoodInProgress(true)}
       />
-
-      {/* <Text style={sliderStyles.levelLabel}>Level: {level}</Text> */}
+      {/* <Text style={sliderStyles.levelLabel}>
+        Use the slider select your emoji
+      </Text> */}
     </View>
   );
 }
@@ -374,9 +375,10 @@ const sliderStyles = StyleSheet.create({
     marginBottom: 8,
   },
   levelLabel: {
-    marginTop: 8,
-    fontSize: 16,
-    fontWeight: "600",
+    marginTop: 2,
+    color: "gray",
+    fontSize: 12,
+    fontWeight: "light",
   },
 });
 
@@ -422,11 +424,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    marginTop: "50%",
+    marginTop: "25%",
   },
   title: {
     fontSize: 18,
-    marginBottom: 10,
     alignSelf: "center",
   },
   input: {
