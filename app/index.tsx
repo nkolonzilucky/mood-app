@@ -91,8 +91,6 @@ const App = () => {
     getSession();
   }, []);
 
-
-
   async function getSession() {
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
@@ -220,11 +218,17 @@ function MoodSection({
   level: number;
   setLevel: (v: number) => void;
 }) {
+  const [newMoodInProgress, setNewMoodInProgress] = useState(false);
   return (
     <>
       <View style={{ justifyContent: "center", marginBottom: 20 }}>
         <Text style={styles.title}>How are you feeling today?</Text>
-        <SliderSection level={level} setLevel={setLevel} />
+        <SliderSection
+          newMoodInProgress={newMoodInProgress}
+          setNewMoodInProgress={setNewMoodInProgress}
+          level={level}
+          setLevel={setLevel}
+        />
         <TextInput
           style={styles.input}
           placeholder="Write your mood..."
@@ -237,7 +241,10 @@ function MoodSection({
           <Button
             disabled={!mood}
             title={editingId ? "Update Mood" : "Save Mood"}
-            onPress={onSave}
+            onPress={() => {
+              onSave();
+              setNewMoodInProgress(false);
+            }}
           />
           {editingId ? (
             <Button
@@ -246,6 +253,7 @@ function MoodSection({
                 setEditingId(null);
                 setMood("");
                 setLevel(3);
+                setNewMoodInProgress(false);
               }}
             />
           ) : (
@@ -255,7 +263,10 @@ function MoodSection({
         <Button
           disabled={!latestMood}
           title="Delete Latest Mood"
-          onPress={onDelete}
+          onPress={() => {
+            onDelete();
+            setNewMoodInProgress(false);
+          }}
         />
       </View>
       {latestMood && (
@@ -267,6 +278,7 @@ function MoodSection({
             setMood(latestMood.text);
             setEditingId(latestMood.id);
             setLevel(latestMood.level);
+            setNewMoodInProgress(true);
           }}
         />
       )}
@@ -287,6 +299,7 @@ function MoodSection({
               setMood(item.text);
               setEditingId(item.id);
               setLevel(item.level);
+              setNewMoodInProgress(true);
             }}
           />
         )}
@@ -321,11 +334,14 @@ function MoodCard({
 function SliderSection({
   level,
   setLevel,
+  newMoodInProgress,
+  setNewMoodInProgress,
 }: {
   level: number;
   setLevel: (v: number) => void;
+  newMoodInProgress: boolean;
+  setNewMoodInProgress: (v: boolean) => void;
 }) {
-  const [newMoodInProgress, setNewMoodInProgress] = useState(false);
   return (
     <View style={sliderStyles.sliderContainer}>
       <Text style={sliderStyles.emoji}>{moodEmoji(level)[0]}</Text>
