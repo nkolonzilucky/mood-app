@@ -191,10 +191,23 @@ function MoodSection({
           value={mood}
           onChangeText={setMood}
         />
-        <Button
-          title={editingId ? "Update Mood" : "Save Mood"}
-          onPress={onSave}
-        />
+        <View style={{ flexDirection: "row", justifyContent: "center" }}>
+          <Button
+            title={editingId ? "Update Mood" : "Save Mood"}
+            onPress={onSave}
+          />
+          {editingId ? (
+            <Button
+              title="Cancel"
+              onPress={() => {
+                setEditingId(null);
+                setMood("");
+              }}
+            />
+          ) : (
+            ""
+          )}
+        </View>
         <Button title="Delete Latest Mood" onPress={onDelete} />
       </View>
       {latestMood && (
