@@ -150,9 +150,9 @@ const App = () => {
       await deleteMoodById(id);
       setLatestMood(null);
       setMood("");
+      setEditingId(null);
       loadLatestMood();
       loadAllMoods();
-      alert("Last Mood deleted successfully");
     } catch (error) {
       alert("Error deleting last mood");
       console.log(error);
@@ -207,6 +207,8 @@ function MoodSection({
           placeholder="Write your mood..."
           value={mood}
           onChangeText={setMood}
+          returnKeyType="done"
+          onSubmitEditing={onSave}
         />
         <View style={{ flexDirection: "row", justifyContent: "center" }}>
           <Button
