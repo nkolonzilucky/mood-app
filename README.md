@@ -49,7 +49,37 @@ The interface prioritizes clarity and low friction:
 
 ## Screenshots / Demo
 
-Images or GIFs
+### Screenshots
+
+#### Mood List
+
+![Login Screen](assets/screenshots/00-login-screen.png)
+
+### Mood Tracker Default screen
+
+![Mood default screen](assets/screenshots/01-default-screen.png)
+
+### New Mood Entry
+
+![New Mood Entry](assets/screenshots/02-new-mood-entry.png)
+
+### Update Entry
+
+![Delete Confirmation](assets/screenshots/03-mood-update-screen.png)
+
+### Delete Confirmation
+
+![Delete Confirmation](assets/screenshots/04-delete-confirmation-alert.png)
+
+### Rate Limit Feedback
+
+![Rate Limit](assets/screenshots/05-rate-limit-alert.png)
+
+### Demo Video
+
+A short screen recording demonstrating authentication, mood creation, rate limiting, and deletion.
+
+▶️ [Watch demo](assets/demo/mood-app-demo.mov)
 
 ## Running the app locally
 
