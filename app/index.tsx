@@ -64,9 +64,8 @@ const App = () => {
     try {
       const data = await getAllMoods();
       setAllMoods(data);
-    } catch (err) {
-      alert("Error while fetching moods");
-      console.log(err);
+    } catch (err: any) {
+      alert(err.message);
     }
   }
 
@@ -74,9 +73,8 @@ const App = () => {
     try {
       const results = await getLastMood();
       setLatestMood(results);
-    } catch (err) {
-      alert("Error fetching latest mood");
-      console.log(err);
+    } catch (err: any) {
+      alert(err.message);
     }
   }
 
@@ -92,9 +90,8 @@ const App = () => {
       setLevel(4);
       await loadAllMoods();
       await loadLatestMood();
-    } catch (err) {
-      alert("Error saving Mood");
-      console.error(err);
+    } catch (err: any) {
+      alert(err.message);
     }
   }
 
@@ -108,9 +105,8 @@ const App = () => {
       setEditingId(null);
       loadLatestMood();
       loadAllMoods();
-    } catch (error) {
-      alert("Error deleting last mood");
-      console.log(error);
+    } catch (err: any) {
+      alert(err.message);
     }
   }
   if (!session) {

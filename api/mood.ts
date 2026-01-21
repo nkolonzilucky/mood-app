@@ -1,6 +1,6 @@
 import { supabase } from "@/supabase";
 import { Mood } from "@/types/supabase";
-import { use } from "react";
+
 
 export async function insertMood(
   text: string | null,
@@ -9,12 +9,20 @@ export async function insertMood(
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) throw Error("No authenticated user.");
+  if (!user) throw new Error("No authenticated user.");
   const { data, error } = await supabase
     .from("moods")
     .insert({ text, level, user_id: user?.id } as any)
     .select();
   if (error) {
+    if (error.message.includes("policy")) {
+      throw new Error(
+        "You have reached your user limit, try again in a few minutes.",
+      );
+    }
+    if (error.message.includes("Mood limit reached")) {
+      throw new Error(error.message);
+    }
     throw error;
   }
 
@@ -27,7 +35,7 @@ export async function getLastMood(): Promise<Mood | null> {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    throw Error("No Authenticated user");
+    throw new Error("No Authenticated user");
   }
     const { data, error } = await supabase
       .from("moods")
@@ -54,7 +62,7 @@ export async function getAllMoods(): Promise<Mood[]> {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) {
-    throw Error("Now Authenticated user");
+    throw new Error("Now Authenticated user");
   }
   const { data, error } = await supabase
     .from("moods")
