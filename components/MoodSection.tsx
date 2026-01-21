@@ -87,7 +87,7 @@ export function MoodSection({
           }}
         />
       </View>
-      {latestMood && (
+      {/* {latestMood && (
         <MoodCard
           text={latestMood.text}
           emoji={moodEmoji(latestMood.level)[0]}
@@ -99,7 +99,7 @@ export function MoodSection({
             setNewMoodInProgress(true);
           }}
         />
-      )}
+      )} */}
 
       <Text style={{ fontWeight: "bold", fontSize: 20, marginTop: 20 }}>
         All Moods

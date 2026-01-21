@@ -41,7 +41,10 @@ const AuthScreen = ({ onAuthSuccess }: { onAuthSuccess: () => void }) => {
           setError(error.message);
           alert("There was an error signing up");
         } else {
-            onAuthSuccess()
+          onAuthSuccess();
+          alert(
+            "Account created successfully. Supabase has sent the confirmation link to the provided email address. Login is allowed after email confirmation.",
+          );
         }
 
     }

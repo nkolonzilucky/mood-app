@@ -1,50 +1,66 @@
-# Welcome to your Expo app 👋
+# Mood - A Minimal Mood App Tracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Overview
 
-## Get started
+Mood is a cross-platform mobile app built with Expo and Supabase that allows users to log their emotional state with an optional reflection. The project was intentionally designed to be minimal in scope while demonstrating production-ready patterns such as authentication, database-level constraints, and secure, user-scoped data access.
 
-1. Install dependencies
+Rather than focusing on feature volume, the app focuses on correctness, data integrity, and clear separation of concerns across the stack.
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
 
-2. Start the app
+- Mobile: Expo (React Native)
+- Language: TypeScript
+- Backend: Supabase (PostgreSQL, Auth)
+- Database: PostgreSQL
+- Security: Row Level Security (RLS), database triggers & functions
+- Tooling: Git, GitHub
 
-   ```bash
-   npx expo start
-   ```
+## Features
 
-In the output, you'll find options to open the app in a
+- User authentication and session-based data access
+- Create, update, and delete mood entries
+- Mood level selection via a visual slider (0–5) with emoji feedback
+- Optional text reflection for each mood entry
+- Server-enforced rate limiting to prevent abuse
+- Confirmation dialogs for destructive actions
+- Typed API layer for safer client–database interaction
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Architecture and Design Decisions
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Database-first constraints
 
-## Get a fresh project
+Instead of enforcing rules only on the client, the app uses PostgreSQL triggers and functions to enforce a time-based rate limit on mood creation. This ensures the rule is applied regardless of client behavior and prevents circumvention through deletes or modified requests.
 
-When you're ready, run:
+### Secure user-scoped data access
 
-```bash
-npm run reset-project
-```
+Row Level Security (RLS) policies ensure users can only access and modify their own data. Filtering by user identity happens at the database level, not in the client.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### Typed Supabase helpers
 
-## Learn more
+Supabase-generated types are used throughout the API layer to reduce runtime errors and keep the client aligned with the database schema.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Minimal UI, intentional UX
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+The interface prioritizes clarity and low friction:
 
-## Join the community
+- A single primary interaction per screen
+- Visual feedback for mood level selection
+- Automatic save behavior to reduce user effort
 
-Join our community of developers creating universal apps.
+## Screenshots / Demo
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Images or GIFs
+
+## Running the app locally
+
+git clone <https://github.com/your-username/mood-app>
+cd mood-app
+npm install
+npx expo start
+
+## Feature Improvements
+
+- Offline-first support
+- Mood history visualizations
+- Accessibility enhancements
+- Exporting mood data
