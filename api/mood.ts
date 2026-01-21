@@ -15,14 +15,7 @@ export async function insertMood(
     .insert({ text, level, user_id: user?.id } as any)
     .select();
   if (error) {
-    if (error.message.includes("policy")) {
-      throw new Error(
-        "You have reached your user limit, try again in a few minutes.",
-      );
-    }
-    if (error.message.includes("Mood limit reached")) {
-      throw new Error(error.message);
-    }
+    console.log(error);
     throw error;
   }
 
