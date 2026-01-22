@@ -13,7 +13,7 @@
 
 <p align="center">
     <img src="assets/demo/mood-app-demo.gif" width="250" />
-    <p>
+    <p align="center">
         Above is a short screen recording demonstrating mood creation, update, rate limiting, and deletion.
     </p>
 </p>
