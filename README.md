@@ -1,11 +1,5 @@
 # Mood - A Minimal Mood App Tracker
 
-## Overview
-
-Mood is a cross-platform mobile app built with Expo and Supabase that allows users to log their emotional state with an optional reflection. The project was intentionally designed to be minimal in scope while demonstrating production-ready patterns such as authentication, database-level constraints, and secure, user-scoped data access.
-
-Rather than focusing on feature volume, the app focuses on correctness, data integrity, and clear separation of concerns across the stack.
-
 ## Screenshots / Demo
 
 ### Demo Video
@@ -14,7 +8,9 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 
 <!-- markdownlint-disable MD045 -->
 <!-- markdownlint-disable MD033 -->
-<img src="assets/demo/mood-app-demo.gif" width="250" />
+<p align="center">
+    <img src="assets/demo/mood-app-demo.gif" width="250" />
+</p>
 <!-- ▶️ [Watch demo](assets/demo/mood-app-demo.gif) -->
 
 ### Screenshots
@@ -26,6 +22,12 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
   <img src="assets/screenshots/03-mood-update-screen.png" width="200"style="border-radius: 25px; margin: 6px;" />
   <img src="assets/screenshots/05-rate-limit-alert.png" width="200" style="border-radius: 25px; margin: 6px;"/>
 </p>
+
+## Overview
+
+Mood is a cross-platform mobile app built with Expo and Supabase that allows users to log their emotional state with an optional reflection. The project was intentionally designed to be minimal in scope while demonstrating production-ready patterns such as authentication, database-level constraints, and secure, user-scoped data access.
+
+Rather than focusing on feature volume, the app focuses on correctness, data integrity, and clear separation of concerns across the stack.
 
 ## Project Status
 
