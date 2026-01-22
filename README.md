@@ -6,6 +6,10 @@ Mood is a cross-platform mobile app built with Expo and Supabase that allows use
 
 Rather than focusing on feature volume, the app focuses on correctness, data integrity, and clear separation of concerns across the stack.
 
+## Project Status
+
+This project is feature-complete and intended as a portfolio demonstration of end-to-end mobile app development.
+
 ## Tech Stack
 
 - Mobile: Expo (React Native)
@@ -51,7 +55,7 @@ The interface prioritizes clarity and low friction:
 
 ### Screenshots
 
-#### Mood List
+#### Login Screen
 
 ![Login Screen](assets/screenshots/00-login-screen.png)
 
