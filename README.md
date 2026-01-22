@@ -17,7 +17,7 @@ This project is feature-complete and intended as a portfolio demonstration of en
 - Backend: Supabase (PostgreSQL, Auth)
 - Database: PostgreSQL
 - Security: Row Level Security (RLS), database triggers & functions
-- Tooling: Git, GitHub
+- Tooling: Git, GitHub, VS Code, Bash Terminal
 
 ## Features
 
@@ -47,9 +47,11 @@ Supabase-generated types are used throughout the API layer to reduce runtime err
 
 The interface prioritizes clarity and low friction:
 
-- A single primary interaction per screen
-- Visual feedback for mood level selection
-- Automatic save behavior to reduce user effort
+- A single screen with scrollable list of mood entries at the bottom
+- A thick and attractive emoji selection slider
+- Confirmation alert for destructive action
+- No alerts for update and save actions, this saves the users from clicking ok to hide the alert.
+- In addition to the save button, a user can also click the return button to save a new entry.
 
 ## Screenshots / Demo
 
@@ -81,20 +83,20 @@ The interface prioritizes clarity and low friction:
 
 ### Demo Video
 
-A short screen recording demonstrating authentication, mood creation, rate limiting, and deletion.
+A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
 
-▶️ [Watch demo](assets/demo/mood-app-demo.mov)
+▶️ [Watch demo](assets/demo/mood-app-demo.gif)
 
 ## Running the app locally
 
-git clone <https://github.com/your-username/mood-app>
-cd mood-app
-npm install
-npx expo start
+- git clone <https://github.com/nkolonzilucky/mood-app>
+- cd mood-app
+- npm install
+- npx expo start
 
 ## Feature Improvements
 
-- Offline-first support
-- Mood history visualizations
-- Accessibility enhancements
-- Exporting mood data
+- Add a google auth provider
+- Add weekly summary stats of the mood levels
+- Represent the summary stats as a line graph to track mood swing trends
+
