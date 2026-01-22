@@ -1,19 +1,7 @@
 # Mood - A Minimal Mood App Tracker
 
-## Screenshots / Demo
-
-### Demo Video
-
-A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
-
 <!-- markdownlint-disable MD045 -->
 <!-- markdownlint-disable MD033 -->
-<p align="center">
-    <img src="assets/demo/mood-app-demo.gif" width="250" />
-</p>
-<!-- ▶️ [Watch demo](assets/demo/mood-app-demo.gif) -->
-
-### Screenshots
 
 <p align="center">
   <img src="assets/screenshots/00-login-screen.png" width="200" style="border-radius: 25px; margin: 6px;"/>
@@ -22,6 +10,12 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
   <img src="assets/screenshots/03-mood-update-screen.png" width="200"style="border-radius: 25px; margin: 6px;" />
   <img src="assets/screenshots/05-rate-limit-alert.png" width="200" style="border-radius: 25px; margin: 6px;"/>
 </p>
+
+<p align="center">
+    <img src="assets/demo/mood-app-demo.gif" width="250" />
+</p>
+A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
+<!-- ▶️ [Watch demo](assets/demo/mood-app-demo.gif) -->
 
 ## Overview
 
