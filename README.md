@@ -27,7 +27,7 @@ Rather than focusing on feature volume, the app focuses on correctness, and clea
 
 ## Project Status
 
-This project is feature-complete and intended as a portfolio demonstration of end-to-end mobile app development.
+This project is intended as a portfolio demonstration of end-to-end mobile app development.
 
 ## Tech Stack
 
