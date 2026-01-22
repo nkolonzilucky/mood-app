@@ -1,4 +1,4 @@
-# Mood - A Minimal Mood App Tracker
+# Mood Tracker - A Minimal mood reflection app
 
 <!-- markdownlint-disable MD045 -->
 <!-- markdownlint-disable MD033 -->
@@ -21,7 +21,7 @@
 
 ## Overview
 
-The Mood App is a cross-platform mobile application built with Expo and Supabase that allows users to log their emotional state with an optional reflection. The project was intentionally designed to be minimal in scope while demonstrating production-ready patterns such as authentication, database-level constraints, and secure, user-scoped data access.
+The Mood Tracker is a cross-platform mobile application built with Expo and Supabase that allows users to log their emotional state with an optional reflection. The project was intentionally designed to be minimal in scope while demonstrating production-ready patterns such as authentication, database-level constraints, and secure, user-scoped data access.
 
 Rather than focusing on feature volume, the app focuses on correctness, and clear separation of concerns across the stack.
 
