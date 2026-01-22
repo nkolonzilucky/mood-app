@@ -55,6 +55,12 @@ The interface prioritizes clarity and low friction:
 
 ## Screenshots / Demo
 
+### Demo Video
+
+A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
+
+▶️ [Watch demo](assets/demo/mood-app-demo.gif)
+
 ### Screenshots
 
 #### Login Screen
@@ -81,11 +87,6 @@ The interface prioritizes clarity and low friction:
 
 ![Rate Limit](assets/screenshots/05-rate-limit-alert.png)
 
-### Demo Video
-
-A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
-
-▶️ [Watch demo](assets/demo/mood-app-demo.gif)
 
 ## Running the app locally
 
