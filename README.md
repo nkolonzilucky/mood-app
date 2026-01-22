@@ -1,4 +1,4 @@
-# Mood Tracker - A Minimal mood reflection app
+# Mood Tracker - A minimal mood reflection app
 
 <!-- markdownlint-disable MD045 -->
 <!-- markdownlint-disable MD033 -->
