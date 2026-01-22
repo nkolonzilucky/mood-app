@@ -6,6 +6,27 @@ Mood is a cross-platform mobile app built with Expo and Supabase that allows use
 
 Rather than focusing on feature volume, the app focuses on correctness, data integrity, and clear separation of concerns across the stack.
 
+## Screenshots / Demo
+
+### Demo Video
+
+A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
+
+<!-- markdownlint-disable MD045 -->
+<!-- markdownlint-disable MD033 -->
+<img src="assets/demo/mood-app-demo.gif" width="250" />
+<!-- ▶️ [Watch demo](assets/demo/mood-app-demo.gif) -->
+
+### Screenshots
+
+<p align="center">
+  <img src="assets/screenshots/00-login-screen.png" width="200" style="border-radius: 25px; margin: 6px;"/>
+  <!-- <img src="assets/screenshots/01-default-screen.png" width="200" style="border-radius: 25px; margin: 6px;" /> -->
+  <img src="assets/screenshots/02-new-mood-entry.png" width="200" style="border-radius: 25px; margin: 6px;"/>
+  <img src="assets/screenshots/03-mood-update-screen.png" width="200"style="border-radius: 25px; margin: 6px;" />
+  <img src="assets/screenshots/05-rate-limit-alert.png" width="200" style="border-radius: 25px; margin: 6px;"/>
+</p>
+
 ## Project Status
 
 This project is feature-complete and intended as a portfolio demonstration of end-to-end mobile app development.
@@ -52,26 +73,6 @@ The interface prioritizes clarity and low friction:
 - Confirmation alert for destructive action
 - No alerts for update and save actions, this saves the users from clicking ok to hide the alert.
 - In addition to the save button, a user can also click the return button to save a new entry.
-
-## Screenshots / Demo
-
-### Demo Video
-
-A short screen recording demonstrating mood creation, update, rate limiting, and deletion.
-
-▶️ [Watch demo](assets/demo/mood-app-demo.gif)
-
-<!-- markdownlint-disable MD033 -->
-<!-- markdownlint-disable MD045 -->
-### Screenshots
-
-<p align="center">
-  <img src="assets/screenshots/00-login-screen.png" width="200" style="border-radius: 25px; margin: 6px;"/>
-  <!-- <img src="assets/screenshots/01-default-screen.png" width="200" style="border-radius: 25px; margin: 6px;" /> -->
-  <img src="assets/screenshots/02-new-mood-entry.png" width="200" style="border-radius: 25px; margin: 6px;"/>
-  <img src="assets/screenshots/03-mood-update-screen.png" width="200"style="border-radius: 25px; margin: 6px;" />
-  <img src="assets/screenshots/05-rate-limit-alert.png" width="200" style="border-radius: 25px; margin: 6px;"/>
-</p>
 
 ## Running the app locally
 
