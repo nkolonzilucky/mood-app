@@ -67,35 +67,11 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 
 <p align="center">
   <img src="assets/screenshots/00-login-screen.png" width="200" style="border-radius: 25px; margin: 6px;"/>
-  <img src="assets/screenshots/01-default-screen.png" width="200" style="border-radius: 25px; margin: 6px;" />
+  <!-- <img src="assets/screenshots/01-default-screen.png" width="200" style="border-radius: 25px; margin: 6px;" /> -->
   <img src="assets/screenshots/02-new-mood-entry.png" width="200" style="border-radius: 25px; margin: 6px;"/>
   <img src="assets/screenshots/03-mood-update-screen.png" width="200"style="border-radius: 25px; margin: 6px;" />
   <img src="assets/screenshots/05-rate-limit-alert.png" width="200" style="border-radius: 25px; margin: 6px;"/>
 </p>
-
-#### Login Screen
-
-![Login Screen](assets/screenshots/00-login-screen.png)
-
-### Mood Tracker Default screen
-
-![Mood default screen](assets/screenshots/01-default-screen.png)
-
-### New Mood Entry
-
-![New Mood Entry](assets/screenshots/02-new-mood-entry.png)
-
-### Update Entry
-
-![Delete Confirmation](assets/screenshots/03-mood-update-screen.png)
-
-### Delete Confirmation
-
-![Delete Confirmation](assets/screenshots/04-delete-confirmation-alert.png)
-
-### Rate Limit Feedback
-
-![Rate Limit](assets/screenshots/05-rate-limit-alert.png)
 
 ## Running the app locally
 
