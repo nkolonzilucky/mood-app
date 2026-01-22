@@ -63,6 +63,14 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 
 ### Screenshots
 
+<p align="center">
+  <img src="assets/screenshots/00-login-screen.png" width="250" />
+  <img src="assets/screenshots/01-default-screen.png" width="250" />
+  <img src="assets/screenshots/02-new-mood-entry.png" width="250" />
+  <img src="assets/screenshots/03-mood-update-screen.png" width="250" />
+  <img src="assets/screenshots/05-rate-limit-alert.png" width="250" />
+</p>
+
 #### Login Screen
 
 ![Login Screen](assets/screenshots/00-login-screen.png)
