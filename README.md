@@ -61,14 +61,16 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 
 ▶️ [Watch demo](assets/demo/mood-app-demo.gif)
 
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD045 -->
 ### Screenshots
 
 <p align="center">
-  <img src="assets/screenshots/00-login-screen.png" width="250" />
-  <img src="assets/screenshots/01-default-screen.png" width="250" />
-  <img src="assets/screenshots/02-new-mood-entry.png" width="250" />
-  <img src="assets/screenshots/03-mood-update-screen.png" width="250" />
-  <img src="assets/screenshots/05-rate-limit-alert.png" width="250" />
+  <img src="assets/screenshots/00-login-screen.png" width="250" style="border-radius: 25px;"/>
+  <img src="assets/screenshots/01-default-screen.png" width="250" style="border-radius: 25px;" />
+  <img src="assets/screenshots/02-new-mood-entry.png" width="250" style="border-radius: 25px;"/>
+  <img src="assets/screenshots/03-mood-update-screen.png" width="250"style="border-radius: 25px;" />
+  <img src="assets/screenshots/05-rate-limit-alert.png" width="250" style="border-radius: 25px;"/>
 </p>
 
 #### Login Screen
@@ -95,7 +97,6 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 
 ![Rate Limit](assets/screenshots/05-rate-limit-alert.png)
 
-
 ## Running the app locally
 
 - git clone <https://github.com/nkolonzilucky/mood-app>
@@ -108,4 +109,3 @@ A short screen recording demonstrating mood creation, update, rate limiting, and
 - Add a google auth provider
 - Add weekly summary stats of the mood levels
 - Represent the summary stats as a line graph to track mood swing trends
-
