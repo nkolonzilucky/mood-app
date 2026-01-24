@@ -10,20 +10,20 @@ Junior Mobile / Full-Stack Developer & Data Analyst
 
 ## Professional Summary
 
-Junior Mobile / Full-Stack Developer with hands-on experience building a production-style mobile application using Expo, TypeScript, and Supabase. Strong focus on data integrity, authentication, and enforcing business rules at the database level using PostgreSQL. Background in technical support for a Python- and React-based system, complemented by formal engineering education, data analytics training, and cloud fundamentals certification. Recent projects demonstrate end-to-end system design and thoughtful technical decision-making.
+Junior Mobile / Full-Stack Developer with hands-on experience building a production-style mobile application using Expo, TypeScript, and Supabase. Strong focus on data integrity, authentication, and enforcing business rules at the database level using PostgreSQL. Background in technical support for a Python and React-based system, complemented by formal engineering education, data analytics training, and cloud fundamentals certification. Recent projects demonstrate end-to-end system design and thoughtful technical decision-making.
 
 ---
 
 ## Technical Skills
 
-**Mobile & Frontend**
+### Mobile & Frontend
 
 - Expo (React Native)
 - React
 - TypeScript
 - JavaScript
 
-**Backend & Database**
+### Backend & Database
 
 - Supabase
 - PostgreSQL
@@ -31,18 +31,20 @@ Junior Mobile / Full-Stack Developer with hands-on experience building a product
 - Row Level Security (RLS)
 - Database triggers & functions
 
-**Cloud & Infrastructure**
+### Cloud & Infrastructure
 
 - Microsoft Azure (cloud fundamentals)
 
-**Data & Analysis**
+### Data Skills
 
-- Python
-- Pandas
+- Data cleaning & validation
 - Exploratory Data Analysis (EDA)
-- Data cleaning and visualization
+- Aggregation & window functions (PostgreSQL)
+- Time series analysis
+- Data visualization
+- Statistical concepts for data analysis
 
-**Tools**
+## Tools
 
 - Git & GitHub
 - VS Code
@@ -51,9 +53,7 @@ Junior Mobile / Full-Stack Developer with hands-on experience building a product
 
 ## Projects
 
-### 📱 Mood — Mobile Mood Tracking App  
-
-**2026**
+### 📱 Mood — Mobile Mood Tracking App - Jan 2026
 
 - Built a cross-platform mobile app using Expo (React Native) and TypeScript
 - Designed and implemented a Supabase/PostgreSQL backend with user authentication
@@ -70,12 +70,18 @@ Junior Mobile / Full-Stack Developer with hands-on experience building a product
 
 ### 📊 Data Analysis Project  
 
-**2025**
+#### Superstore Sales & Profit Exploratory Data Analysis - Jan 2026
 
-- Cleaned and analyzed real-world data using Python and Pandas
-- Performed exploratory data analysis to identify trends and patterns
-- Created visualizations to communicate findings clearly
-- Documented assumptions, cleaning steps, and insights
+**Tools:** Python, pandas, seaborn, matplotlib  
+**Link:** <https://github.com/your-username/superstore-eda>
+
+- Performed end-to-end exploratory data analysis on retail transaction data
+- Analyzed sales and profit distributions, trends over time, and category-level performance
+- Investigated the relationship between discounts, sales, and profitability
+- Identified patterns showing high discount levels on low-value sales are frequently
+  associated with negative profit outcomes
+- Communicated findings using clear visualizations and structured analytical narratives
+- Framed insights cautiously, distinguishing observations from strategic recommendations
 
 ---
 
@@ -83,7 +89,7 @@ Junior Mobile / Full-Stack Developer with hands-on experience building a product
 
 ### Technical Support — J5 Project  
 
-**Prior to 2025**
+#### Prior to 2025
 
 - Provided technical support for a production system built with Python and React
 - Assisted users with troubleshooting, bug reproduction, and issue resolution
