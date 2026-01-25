@@ -10,7 +10,7 @@ Junior Mobile / Full-Stack Developer & Associate Data Analyst
 
 ## Professional Summary
 
-Junior Mobile / Full-Stack Developer & Data Analyst Associate with hands-on experience building a production-style mobile application using Expo, TypeScript, and Supabase, and performing Data cleaning and Exploratory Data Analysis using pandas,matplotlib, seaborn and Jupyter Notebook.
+Junior Mobile / Full-Stack Developer & Associate Data Analyst with hands-on experience building production-style mobile applications using Expo, TypeScript, and Supabase, and performing Data cleaning and Exploratory Data Analysis using pandas,matplotlib, seaborn and Jupyter Notebook.
 
 ---
 
