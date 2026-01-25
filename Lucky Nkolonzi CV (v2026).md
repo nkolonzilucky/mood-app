@@ -126,14 +126,14 @@ Eskom Distribution, Cape Town | Mar 2017 – Feb 2019
 
 ## Education & Certifications
 
-- **Bachelor of Science (BSc) in Electrical Engineering**  - 2017
-  | **University of Cape Town**
-
-- **Data Analyst Associate Certificate** - 2026
+- **Associate Data Analyst Certificate** - 2026
   | **DataCamp**
   
 - **Microsoft Azure Fundamentals (AZ-900)** — 2025  
   | **Microsoft**
+
+- **Bachelor of Science (BSc) in Electrical Engineering**  - 2017
+  | **University of Cape Town**
 
   ### **Certificates of completion** | **Kaggle**
 
