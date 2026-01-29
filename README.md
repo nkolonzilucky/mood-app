@@ -77,6 +77,7 @@ The interface prioritizes clarity and low friction:
 - git clone <https://github.com/nkolonzilucky/mood-app>
 - cd mood-app
 - npm install
+- Open the '/Users/nkolonzilucky/Desktop/Nozee's App/practiceApps/mood-app/supabase.ts' file, and enter your Supabase metadata
 - npx expo start
 
 ## Feature Improvements
